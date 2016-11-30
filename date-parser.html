@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<script type="text/javascript" src="../bower_components/moment/min/moment-with-locales.min.js"></script>
+
+<dom-module id="date-parser">
+	<template>
+		[[output]]
+	</template>
+	<script>
+		Polymer({
+			is: 'date-parser',
+			properties: {
+				timestamp: {
+					type: String,
+					value: ''
+				},
+				format: {
+					type: String,
+					value: 'DD/MM/YYYY HH:mm'
+				},
+				output: {
+					type: String,
+					notify: true,
+					computed: '_formatTimestamp(timestamp, format)'
+				}
+			},
+			_formatTimestamp: function(timestamp, format) {
+				if (timestamp) {
+					output = moment.utc(timestamp).format(format);
+				} else {
+					output = '-';
+				}
+				return output;
+			}
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Date Parser</title>
+		<link rel="import" href="./date-parser.html" async>
+	</head>
+	<body>
+
+		<template is="dom-bind">
+			<span>Timestamp: <input type="text" value="{{timestamp::change}}"></span>
+			<span>Format: <input type="text" value="{{format::change}}"></span>
+			<br>
+			<date-parser
+				timestamp="{{timestamp}}"
+				format={{format}}>
+			</date-parser>
+		</template>
+
+		<script>
+			window.Polymer = {  dom: 'shadow', lazyRegister: true };
+			(function() {
+				'use strict';
+				var onload = function() {
+					if (!window.HTMLImports) {
+						document.dispatchEvent(
+							new CustomEvent('WebComponentsReady', {bubbles: true})
+						);
+					}
+				};
+				var webComponentsSupported = (
+					'registerElement' in document
+					&& 'import' in document.createElement('link')
+					&& 'content' in document.createElement('template')
+				);
+				if (!webComponentsSupported) {
+					var script = document.createElement('script');
+					script.async = true;
+					script.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+					script.onload = onload;
+					document.head.appendChild(script);
+				} else {
+					onload();
+				}
+			})();
+		</script>
+	</body>
+</html>
